@@ -1,0 +1,18 @@
+name: AnimatedBans
+main: dev.kidepcode.animatedbans.AnimatedBansPlugin
+version: 1.2.0
+api-version: "1.21"
+authors: [ kidepcode ]
+description: Plays an animated ban sequence and then executes a configured tempban command.
+
+commands:
+  animatedbans:
+    description: AnimatedBans command
+    usage: "/animatedbans ban <player> <time> <reason...>"
+    permission: animatedbans.ban
+
+permissions:
+  animatedbans.ban:
+    default: op
+  animatedbans.reload:
+    default: op

@@ -1,0 +1,71 @@
+# AnimatedBans configuration (MiniMessage everywhere)
+
+animation:
+  durationSeconds: 15
+
+  # Target will be lifted relative to their starting position.
+  liftTotalBlocks: 9.0
+
+  # Titles are resent every N seconds while the animation is running.
+  # Title is also sent immediately at the start (tick 1).
+  titleIntervalSeconds: 3
+
+  freeze:
+    lockYawPitch: true
+    blockCommands: true
+    blockInventory: true
+
+  # A "rune cage" animation:
+  # - Rotating polygon cage around the player
+  # - Two counter-rotating rune rings (top/bottom)
+  # - Light pulsation via radius oscillation (not extra effects, same particle)
+  particles:
+    type: "ENCHANT"
+
+    # Cage geometry
+    polygonPoints: 6                 # 3..10 recommended
+    cageRadius: 1.55                 # base radius
+    radiusPulseAmplitude: 0.22       # pulsation amplitude
+    radiusPulseSpeed: 0.18           # radians per tick
+    angularSpeed: 0.26               # radians per tick
+
+    # Vertical cage columns
+    columnHeight: 2.6
+    columnParticlesPerColumn: 3      # per tick, per vertex (keep small)
+
+    # Rune rings (top/bottom), counter-rotating
+    ringRadiusOffset: 0.10
+    ringParticles: 10                # per ring per tick (keep small)
+    ringHeightBottom: 0.65
+    ringHeightTop: 2.05
+
+  ending:
+    # A small visual "pop" at the end (particles only).
+    explosion:
+      enabled: true
+      particle: "EXPLOSION"
+      count: 1
+      offset: 0.0
+      extra: 0.0
+
+    # Optional: kill the target right after the animation ends and BEFORE the ban command.
+    killTargetBeforeBan: false
+
+titles:
+  # Placeholders: <player> <time> <reason>
+  title: "<red><bold>CHEATER FOUND</bold>"
+  subtitle: "<gray><player> <dark_gray>• <yellow><time> <dark_gray>• <white><reason>"
+
+banCommand:
+  # Placeholders: {player} {time} {reason}
+  template: "tempban {player} {time} {reason}"
+
+messages:
+  prefix: "<dark_gray>[<red>AnimatedBans</red>]</dark_gray> "
+  noPermission: "<red>You don't have permission to do that."
+  usage: "<gray>Usage: <yellow>/animatedbans ban <player> <time> <reason...>"
+  usageReload: "<gray>Usage: <yellow>/animatedbans reload"
+  playerNotFound: "<red>Player not found: <yellow><player>"
+  alreadyAnimating: "<red>This player is already in an animation."
+  started: "<green>Animation started for <yellow><player><green>."
+  reloaded: "<green>Configuration reloaded."
